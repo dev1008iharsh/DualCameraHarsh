@@ -1,51 +1,247 @@
-# 🎥 Dual Camera Capture — Advanced iOS Camera System
-Engineered an advanced iOS multi-camera system using AVFoundation and ReplayKit, enabling dual camera capture, real-time processing, 4K recording, secure compression and Firebase uploads, along with integrated sensor data tracking (CoreLocation &amp; CoreMotion) for a complete production-grade solution.
+<h1 align="center">🎥 Advanced Camera System — Doctor Patient Recording App</h1>
 
-Youtube Video Link : https://youtu.be/7cVl1fcF2Tc
+<p align="center">
+Production-grade iOS camera solution built using AVFoundation with secure medical data handling.
+</p>
 
-<img width="1127" height="615" alt="dualcamera" src="https://github.com/user-attachments/assets/9a634db7-2b00-4492-975c-5962120f9cfd" />
+<p align="center">
+<a href="https://youtu.be/7cVl1fcF2Tc">▶️ Watch Advanced Camera System Demo</a>
+</p>
 
+---
 
-• 🎥 Built using AVFoundation, leveraging AVCaptureMultiCamSession for simultaneous front and rear camera capture with hardware-aware configuration
-• 📷 Managed camera inputs using AVCaptureDevice and AVCaptureDeviceInput, with output streams via AVCaptureVideoDataOutput and AVCaptureAudioDataOutput for real-time processing
-• 🖥️ Implemented hybrid dual-camera rendering using ReplayKit (RPScreenRecorder) to record composed UI (Picture-in-Picture via AVCaptureVideoPreviewLayer) for reliable dual-stream capture
-• 🎬 Achieved 4K 60fps recording by configuring AVCaptureDevice.Format with optimized frame duration and resolution settings
-• ⚡ Processed real-time frames using AVCaptureVideoDataOutputSampleBufferDelegate, handling CMSampleBuffer for live frame-level operations
+<h2>📸 Preview</h2>
 
-• 📦 Built custom encoding pipeline using AVAssetWriter, AVAssetWriterInput, and AVAssetWriterInputPixelBufferAdaptor for efficient compression and optimized video output
-• 🎤 Captured separate audio instructions using AVAudioRecorder, enabling independent audio stream management and synchronization flexibility
+<p align="center">
+<img src="https://github.com/user-attachments/assets/71dd00cd-b4ca-4392-8502-0238018fecb6" width="70%" />
+</p>
 
-• 🔐 Implemented secure file packaging using ZIPFoundation / SSZipArchive for password-protected ZIP compression before upload
-• ☁️ Integrated Firebase Storage (StorageReference) for secure file uploads, metadata handling, and progress monitoring
+---
 
-• 📍 Captured location data using CLLocationManager (CoreLocation) for GPS (latitude, longitude) tracking
-• 📱 Collected motion data using CMMotionManager (CoreMotion) including accelerometer, gyroscope, magnetometer, and device motion (attitude, gravity, rotation rate)
-• 🌡️ Measured altitude and pressure using CMAltimeter, and tracked steps/distance using CMPedometer
+<h2>✨ Features</h2>
 
-• 🧵 Ensured thread safety and performance using GCD (DispatchQueue) and Swift Concurrency (Task, MainActor) for background processing and UI updates
-• 🧠 Applied ARC-based memory management, avoiding retain cycles using weak references in asynchronous and delegate-based workflows
+<ul>
+<li>🎥 Dual Camera Capture (Front + Rear simultaneously)</li>
+<li>📷 Single Camera Recording using AVCaptureSession</li>
+<li>🎬 4K 60fps high-quality video recording</li>
+<li>⚡ Real-time frame processing (CMSampleBuffer)</li>
+<li>🎤 Independent audio recording pipeline</li>
+<li>🔐 Password-protected ZIP compression before upload</li>
+<li>☁️ Secure upload to Firebase Storage</li>
+<li>🔄 Background upload with resume support</li>
+<li>🔐 Google Sign-In authentication</li>
+<li>📍 Sensor data collection (GPS, Motion, Altitude, Steps)</li>
+<li>🧵 Thread-safe architecture using GCD + Swift Concurrency</li>
+<li>🧠 Optimized memory management (ARC, weak references)</li>
+<li>🏥 Designed for Doctor-Patient remote diagnostics use case</li>
+</ul>
 
-• 🧩 Designed modular architecture with components like CameraManager, RecordingManager, SensorManager, CompressionService, and UploadService, following clean architecture and separation of concerns
+---
 
-<img width="1126" height="614" alt="dualcamera2" src="https://github.com/user-attachments/assets/e2f41892-7de0-4e90-b661-965c360e032a" />
+<h2>🎯 Key Highlights</h2>
 
+<p>
+Built a highly scalable and production-ready camera system that enables secure video recording 
+and transmission for medical support scenarios where patients can record and send diagnostic videos to doctors.
+</p>
 
-This advanced iOS camera system is built using a combination of AVFoundation, ReplayKit, CoreMotion, CoreLocation, and Firebase SDKs, structured in a modular architecture to handle real-time video capture, processing, sensor fusion, and secure data transmission. The core of the camera pipeline is powered by AVFoundation, specifically AVCaptureMultiCamSession, which enables simultaneous access to both front and rear cameras. Camera hardware is accessed via AVCaptureDevice, and input streams are configured using AVCaptureDeviceInput, while output streams are handled through AVCaptureVideoDataOutput for real-time frame delivery and AVCaptureAudioDataOutput when capturing audio along with video.
+---
 
-Since iOS imposes hardware and performance constraints on true dual-camera recording, an alternative hybrid approach is implemented using ReplayKit’s RPScreenRecorder, which records the composed UI layer where both camera feeds are rendered (for example, using a Picture-in-Picture layout with AVCaptureVideoPreviewLayer). This approach ensures consistent recording of both streams even under device limitations. For achieving high-quality video output such as 4K at 60fps, the system configures camera capabilities using AVCaptureDevice.Format, adjusting frame durations and resolution to match supported hardware formats.
+<h2>📷 Camera Capabilities</h2>
 
-Real-time video processing is achieved through AVCaptureVideoDataOutputSampleBufferDelegate, where each CMSampleBuffer frame is intercepted and processed. These frames are then encoded and written to disk using AVAssetWriter, along with AVAssetWriterInput and AVAssetWriterInputPixelBufferAdaptor, forming a custom compression pipeline that ensures efficient encoding, reduced file size, and optimized storage. This also enables applying transformations, overlays, or frame-level optimizations if required.
+<h3>🎥 Dual Camera System</h3>
 
-Audio instructions are recorded independently using AVAudioRecorder, allowing better control over audio quality, synchronization, and post-processing. This separation ensures that instructional audio is cleanly captured without being affected by video processing overhead.
+<ul>
+<li>Implemented using <b>AVCaptureMultiCamSession</b></li>
+<li>Simultaneous front & rear capture</li>
+<li>Picture-in-Picture rendering using <b>AVCaptureVideoPreviewLayer</b></li>
+<li>Fallback using <b>ReplayKit (RPScreenRecorder)</b> for stability</li>
+</ul>
 
-For secure packaging of recorded data, files are compressed into archives using libraries like ZIPFoundation or SSZipArchive, which support password-protected ZIP creation. This ensures that sensitive data is encrypted before being transmitted. The final compressed output is uploaded to cloud storage using Firebase Storage (Storage SDK), where StorageReference is used to manage file paths and uploads, along with metadata handling and progress tracking for reliability.
+---
 
-In parallel, the system captures rich environmental and motion data using CoreLocation and CoreMotion frameworks. CLLocationManager is used for GPS tracking (latitude and longitude), while CMMotionManager provides access to accelerometer, gyroscope, and magnetometer data. Advanced fused motion data is retrieved via device motion updates (attitude, gravity, rotation rate). Additional sensors include CMAltimeter for altitude and air pressure measurements, and CMPedometer for tracking steps, distance, and user movement patterns. This multi-sensor integration enables contextual awareness alongside video recording.
+<h3>📷 Single Camera Capture</h3>
 
-Threading and performance optimization are handled using Grand Central Dispatch (GCD) and Swift Concurrency (Task, MainActor), ensuring that heavy operations such as encoding, compression, and network uploads are executed on background queues, while UI updates remain on the main thread. Memory management is carefully handled using ARC with techniques like weak references to avoid retain cycles, especially in delegate-based and asynchronous operations.
+<ul>
+<li>Built using <b>AVCaptureSession</b> (core capture pipeline)</li>
+<li>Camera accessed via <b>AVCaptureDevice</b></li>
+<li>Input configured using <b>AVCaptureDeviceInput</b></li>
+<li>Outputs:
+  <ul>
+    <li><b>AVCaptureVideoDataOutput</b></li>
+    <li><b>AVCaptureAudioDataOutput</b></li>
+  </ul>
+</li>
+<li>Live preview using <b>AVCaptureVideoPreviewLayer</b></li>
+</ul>
 
-Architecturally, the system is divided into multiple reusable and testable components such as a CameraManager (handling AVFoundation setup), RecordingManager (handling AVAssetWriter and file output), SensorManager (CoreMotion and CoreLocation data aggregation), CompressionService (ZIP handling), and UploadService (Firebase integration). This modular design follows principles of clean architecture and separation of concerns, making the system scalable, maintainable, and production-ready.
+<p>
+👉 <b>Core Concept:</b> AVCaptureSession acts as the central pipeline that connects camera input to output streams and manages data flow efficiently  [oai_citation:0‡Apple Developer](https://developer.apple.com/documentation/avfoundation/avcapturesession?utm_source=chatgpt.com)
+</p>
 
-Overall, this solution demonstrates advanced expertise in real-time media processing, multi-camera handling, sensor fusion, secure data workflows, and performance optimization, making it suitable for complex applications such as telemedicine, surveillance, logistics tracking, or AI-assisted video analytics.
+---
 
+<h2>⚡ Real-Time Processing</h2>
 
+<ul>
+<li>Frame handling via <b>CMSampleBuffer</b></li>
+<li>Delegate: <b>AVCaptureVideoDataOutputSampleBufferDelegate</b></li>
+<li>Supports live processing (filters, transformations, analytics)</li>
+</ul>
+
+---
+
+<h2>🎬 Video Encoding Pipeline</h2>
+
+<ul>
+<li><b>AVAssetWriter</b> for custom encoding</li>
+<li><b>AVAssetWriterInput</b> for stream handling</li>
+<li><b>PixelBufferAdaptor</b> for frame-level control</li>
+<li>Optimized compression for reduced file size</li>
+</ul>
+
+---
+
+<h2>🎤 Audio System</h2>
+
+<ul>
+<li>Separate recording using <b>AVAudioRecorder</b></li>
+<li>Improved audio clarity and synchronization</li>
+</ul>
+
+---
+
+<h2>🔐 Secure Data Handling</h2>
+
+<ul>
+<li>Video compressed into password-protected ZIP</li>
+<li>Encryption before network transmission</li>
+<li>Ensures medical-grade data security</li>
+</ul>
+
+---
+
+<h2>☁️ Background Upload System</h2>
+
+<ul>
+<li>Implemented using <b>URLSession background configuration</b></li>
+<li>Upload continues when app is minimized</li>
+<li>Resume upload on app relaunch</li>
+<li>Retry mechanism for failed uploads</li>
+</ul>
+
+---
+
+<h2>🔐 Authentication</h2>
+
+<ul>
+<li>Google Sign-In integration</li>
+<li>Secure user identity management</li>
+</ul>
+
+---
+
+<h2>📍 Sensor Integration</h2>
+
+<ul>
+<li><b>CoreLocation</b> → GPS tracking</li>
+<li><b>CoreMotion</b> → accelerometer, gyroscope</li>
+<li><b>CMAltimeter</b> → altitude & pressure</li>
+<li><b>CMPedometer</b> → steps & movement</li>
+</ul>
+
+---
+
+<h2>🧵 Thread Safety & Performance</h2>
+
+<ul>
+<li>Dedicated queues using <b>DispatchQueue</b></li>
+<li>Heavy work offloaded from main thread</li>
+<li>Modern concurrency:
+  <ul>
+    <li><b>async/await</b></li>
+    <li><b>Task</b></li>
+    <li><b>MainActor</b></li>
+  </ul>
+</li>
+</ul>
+
+---
+
+<h2>🧠 Memory Management</h2>
+
+<ul>
+<li>ARC-based lifecycle management</li>
+<li>Weak references to avoid retain cycles</li>
+<li>Safe handling of delegates & closures</li>
+<li>Efficient buffer reuse for performance optimization</li>
+</ul>
+
+---
+
+<h2>🧩 Architecture</h2>
+
+<ul>
+<li><b>CameraManager</b> → Capture session handling</li>
+<li><b>RecordingManager</b> → Encoding pipeline</li>
+<li><b>SensorManager</b> → Motion + location</li>
+<li><b>CompressionService</b> → ZIP encryption</li>
+<li><b>UploadService</b> → Firebase upload</li>
+</ul>
+
+---
+
+<h2>⚙️ How It Was Built</h2>
+
+<p>
+This system is built using <b>AVFoundation</b>, Apple’s core multimedia framework, where the central component 
+<b>AVCaptureSession</b> manages the complete capture pipeline including camera input and video/audio outputs. 
+The application uses both <b>AVCaptureMultiCamSession</b> for dual camera capture and standard 
+<b>AVCaptureSession</b> for single camera workflows, ensuring compatibility across devices.
+</p>
+
+<p>
+Real-time video frames are processed using <b>CMSampleBuffer</b> through delegate callbacks, 
+and encoded using <b>AVAssetWriter</b> to create optimized video files. Audio is recorded separately 
+to maintain clarity and synchronization.
+</p>
+
+<p>
+Once recording is completed, the video is compressed into a password-protected ZIP file to ensure 
+data security. The file is then uploaded to Firebase Storage using a resilient background upload system 
+that supports pause, resume, and retry functionality even if the app is terminated.
+</p>
+
+<p>
+Additionally, the system collects sensor data using CoreLocation and CoreMotion, allowing doctors 
+to analyze environmental and movement context along with video data.
+</p>
+
+<p>
+Thread safety is maintained using GCD and Swift Concurrency, ensuring all heavy operations like encoding 
+and uploading are executed off the main thread, while UI updates remain responsive.
+</p>
+
+<p>
+Memory is managed using ARC with best practices like weak references and controlled lifecycle handling 
+to prevent leaks and crashes, making the system stable for long recording sessions.
+</p>
+
+---
+
+<h2>👨‍💻 Author</h2>
+
+<p>
+<b>Harsh Darji — iOS Developer 🚀</b>
+</p>
+
+<ul>
+<li><b>Developer:</b> Harsh</li>
+<li><b>Role:</b> Senior iOS Engineer (Swift & UIKit Specialist)</li>
+<li><b>Phone:</b> <a href="tel:+919662108047">+91 9662108047</a></li>
+<li><b>Email:</b> <a href="mailto:dev.iharsh1008@gmail.com">dev.iharsh1008@gmail.com</a></li>
+<li><b>GitHub:</b> <a href="https://github.com/dev1008iharsh">dev1008iharsh</a></li>
+<li><b>LinkedIn:</b> <a href="https://www.linkedin.com/in/dev1008iharsh/">dev1008iharsh</a></li>
+</ul>
+
+---
