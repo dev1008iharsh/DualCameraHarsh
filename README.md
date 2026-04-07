@@ -76,7 +76,7 @@ and transmission for medical support scenarios where patients can record and sen
 </ul>
 
 <p>
-👉 <b>Core Concept:</b> AVCaptureSession acts as the central pipeline that connects camera input to output streams and manages data flow efficiently  [oai_citation:0‡Apple Developer](https://developer.apple.com/documentation/avfoundation/avcapturesession?utm_source=chatgpt.com)
+👉 <b>Core Concept:</b> AVCaptureSession acts as the central pipeline that connects camera input to output streams and manages data flow efficiently.
 </p>
 
 ---
